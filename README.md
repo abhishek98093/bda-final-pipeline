@@ -90,14 +90,12 @@ python 03_combine_and_process.py   # Stage 3: Combine & Process
 - Saves raw JSON responses as `data/raw_json/{TICKER}_raw.json`
 - Zero-pads CIK numbers automatically (e.g., 320193 → 0000320193)
 - No processing - pure data acquisition
-- **Duration:** ~5-7 minutes
 
 ### Stage 2: JSON to Company CSV (`02_json_to_company_csv.py`)
 - Reads each raw JSON file
 - Uses `xbrl_tags.py` mapping to extract features (first match wins)
 - Creates individual CSV per company: `company_csv/{TICKER}.csv`
 - Extracts 6 years of data (2020-2025)
-- **Duration:** ~2-3 seconds
 
 ### Stage 3: Combine & Process (`03_combine_and_process.py`)
 - Combines all 30 company CSVs into one dataset
@@ -105,7 +103,6 @@ python 03_combine_and_process.py   # Stage 3: Combine & Process
 - Handles missing values
 - Calculates 12 financial ratios
 - Creates final `data/processed/final_peer_comparison.csv`
-- **Duration:** ~2-3 seconds
 
 ---
 
