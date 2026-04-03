@@ -160,8 +160,21 @@ def extract_company_data(json_filepath, years):
         if record.get('gross_profit') is None:
             if record.get('revenue') is not None and record.get('cost_of_revenue') is not None:
                 record['gross_profit'] = record['revenue'] - record['cost_of_revenue']
-        
-        # Only add record if we have at least some core data
+            # Total Liabilities (universal logic)
+        if record.get('total_liabilities') is None:
+            
+            # Try direct extraction again (safety)
+            direct = extract_value(facts, ['Liabilities'], year)
+            
+            if direct is not None:
+                record['total_liabilities'] = direct
+            else:
+                current_liab = record.get('current_liabilities')
+                noncurrent_liab = extract_value(facts, ['LiabilitiesNoncurrent'], year)
+                
+                if current_liab is not None and noncurrent_liab is not None:
+                    record['total_liabilities'] = current_liab + noncurrent_liab
+                # Only add record if we have at least some core data
         has_data = (
             record.get('total_assets') is not None or 
             record.get('revenue') is not None or 

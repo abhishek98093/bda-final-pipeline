@@ -1,7 +1,7 @@
 {
   "_metadata": {
     "ticker": "ZM",
-    "fetch_timestamp": "2026-04-03T11:33:29.608041",
+    "fetch_timestamp": "2026-04-03T19:26:23.566791",
     "source": "SEC EDGAR Company Facts API",
     "api_endpoint": "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json",
     "documentation": "https://www.sec.gov/edgar/sec-api-documentation"
