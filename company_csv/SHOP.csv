@@ -1,0 +1,3 @@
+ticker,company_name,fiscal_year,revenue,net_income,gross_profit,operating_income,cost_of_revenue,interest_expense,eps_basic,eps_diluted,total_assets,total_liabilities,stockholders_equity,current_assets,current_liabilities,cash_and_equivalents,short_term_investments,accounts_receivable,long_term_debt,inventory
+SHOP,Shopify Inc.,2025,7060000000,132000000,3515000000,-1418000000,3545000000,241000000,0.1,0.1,13924000000,410000000,8239000000,7254000000,1956000000,1498000000,3981000000,48000000,918000000,26000000
+SHOP,Shopify Inc.,2024,5600000000,-3460000000,2754000000,-822000000,2846000000,75000000,-2.73,-2.73,11299000000,1335000000,11133000000,6275000000,898000000,1413000000,3595000000,30000000,0,19000000

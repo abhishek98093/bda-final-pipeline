@@ -7,26 +7,31 @@ IIIT Allahabad - Big Data Analytics Course
 
 This is the main pipeline runner that executes all three stages:
   Stage 1: Fetch raw data from SEC EDGAR API → JSON files
-  Stage 2: Aggregate raw JSONs → raw CSV
-  Stage 3: Process & enhance → final CSV with ratios
+  Stage 2: Extract JSON to individual company CSVs
+  Stage 3: Combine, clean & calculate ratios → final CSV
 
 Usage:
     python run_pipeline.py           # Run all stages
-    python run_pipeline.py --stage 1 # Run only Stage 1
-    python run_pipeline.py --stage 2 # Run only Stage 2
-    python run_pipeline.py --stage 3 # Run only Stage 3
+    python run_pipeline.py --stage 1 # Run only Stage 1 (fetch data)
+    python run_pipeline.py --stage 2 # Run only Stage 2 (JSON to CSV)
+    python run_pipeline.py --stage 3 # Run only Stage 3 (combine & process)
+    python run_pipeline.py --skip-fetch  # Skip Stage 1, run 2 and 3
 
 Output Directory Structure:
     data/
-    ├── raw_json/          # Stage 1: Raw API responses
+    ├── raw_json/                    # Stage 1: Raw API responses
     │   ├── AAPL_raw.json
-    │   ├── MSFT_raw.json
     │   └── ...
-    ├── raw_csv/           # Stage 2: Aggregated raw data
-    │   └── raw_financial_data.csv
-    └── processed/         # Stage 3: Final processed data
+    company_csv/                     # Stage 2: Individual company CSVs
+    │   ├── AAPL.csv
+    │   └── ...
+    data/
+    ├── raw_csv/                     # Stage 3: Combined raw data
+    │   └── raw_combined_data.csv
+    └── processed/                   # Stage 3: Final processed data
         ├── final_peer_comparison.csv
-        └── peer_comparison_latest_year.csv
+        ├── peer_comparison_latest_year.csv
+        └── peer_comparison_5year.csv
 ================================================================================
 """
 
@@ -37,13 +42,13 @@ import argparse
 from datetime import datetime
 
 
-def run_stage(stage_num, script_name):
+def run_stage(stage_num, script_name, description):
     """Run a pipeline stage."""
     print(f"\n{'=' * 70}")
-    print(f"🚀 EXECUTING STAGE {stage_num}")
+    print(f"🚀 STAGE {stage_num}: {description}")
     print(f"{'=' * 70}")
     
-    script_path = os.path.join(os.path.dirname(__file__), script_name)
+    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), script_name)
     
     if not os.path.exists(script_path):
         print(f"❌ Error: Script not found: {script_path}")
@@ -53,7 +58,7 @@ def run_stage(stage_num, script_name):
         result = subprocess.run(
             [sys.executable, script_path],
             check=True,
-            cwd=os.path.dirname(__file__)
+            cwd=os.path.dirname(os.path.abspath(__file__))
         )
         return result.returncode == 0
     except subprocess.CalledProcessError as e:
@@ -70,10 +75,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-    python run_pipeline.py           # Run all stages
-    python run_pipeline.py --stage 1 # Fetch raw data only
-    python run_pipeline.py --stage 2 # Aggregate only (requires Stage 1)
-    python run_pipeline.py --stage 3 # Process only (requires Stage 2)
+    python run_pipeline.py             # Run all stages
+    python run_pipeline.py --stage 1   # Fetch raw data only
+    python run_pipeline.py --stage 2   # Extract JSON to CSV only
+    python run_pipeline.py --stage 3   # Combine & process only
+    python run_pipeline.py --skip-fetch # Skip fetch, run stages 2 & 3
         """
     )
     
@@ -82,6 +88,12 @@ Examples:
         type=int,
         choices=[1, 2, 3],
         help='Run only specific stage (1, 2, or 3)'
+    )
+    
+    parser.add_argument(
+        '--skip-fetch',
+        action='store_true',
+        help='Skip Stage 1 (data fetch), useful if you already have JSON files'
     )
     
     args = parser.parse_args()
@@ -97,13 +109,15 @@ Examples:
     # Pipeline stages
     stages = [
         (1, "01_fetch_raw_data.py", "Fetch raw data from SEC EDGAR API"),
-        (2, "02_aggregate_raw_data.py", "Aggregate raw JSONs into CSV"),
-        (3, "03_process_and_enhance.py", "Process, clean & calculate ratios"),
+        (2, "02_json_to_company_csv.py", "Extract JSON to individual company CSVs"),
+        (3, "03_combine_and_process.py", "Combine, clean & calculate ratios"),
     ]
     
     # Determine which stages to run
     if args.stage:
         stages_to_run = [s for s in stages if s[0] == args.stage]
+    elif args.skip_fetch:
+        stages_to_run = [s for s in stages if s[0] >= 2]
     else:
         stages_to_run = stages
     
@@ -116,7 +130,7 @@ Examples:
     results = []
     
     for stage_num, script_name, description in stages_to_run:
-        success = run_stage(stage_num, script_name)
+        success = run_stage(stage_num, script_name, description)
         results.append((stage_num, success))
         
         if not success:
@@ -145,11 +159,14 @@ Examples:
         print("🎉 PIPELINE COMPLETED SUCCESSFULLY!")
         print("=" * 70)
         print("\n📁 Output files:")
-        print("   • data/raw_json/*.json       (Raw API responses)")
-        print("   • data/raw_csv/*.csv         (Aggregated raw data)")
-        print("   • data/processed/*.csv       (Final processed data)")
-        print("\n📊 Main deliverable:")
-        print("   → data/processed/final_peer_comparison.csv")
+        print("   • data/raw_json/*.json          (Raw API responses)")
+        print("   • company_csv/*.csv             (Individual company data)")
+        print("   • data/raw_csv/*.csv            (Combined raw data)")
+        print("   • data/processed/*.csv          (Final processed data)")
+        print("\n📊 Main deliverables:")
+        print("   → data/processed/final_peer_comparison.csv (all 6 years)")
+        print("   → data/processed/peer_comparison_5year.csv (2020-2024)")
+        print("   → data/processed/peer_comparison_latest_year.csv")
     else:
         print("\n❌ Pipeline completed with errors. Check output above.")
         sys.exit(1)

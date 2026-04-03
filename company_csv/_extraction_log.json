@@ -1,0 +1,276 @@
+{
+  "timestamp": "2026-04-03T14:53:38.328652",
+  "total_companies": 29,
+  "successful": 30,
+  "failed": 0,
+  "years_extracted": [
+    2025,
+    2024,
+    2023,
+    2022,
+    2021,
+    2020
+  ],
+  "features_extracted": [
+    "revenue",
+    "net_income",
+    "gross_profit",
+    "operating_income",
+    "cost_of_revenue",
+    "interest_expense",
+    "eps_basic",
+    "eps_diluted",
+    "total_assets",
+    "total_liabilities",
+    "stockholders_equity",
+    "current_assets",
+    "current_liabilities",
+    "cash_and_equivalents",
+    "short_term_investments",
+    "accounts_receivable",
+    "long_term_debt",
+    "inventory"
+  ],
+  "log": [
+    {
+      "ticker": "AAPL",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/AAPL.csv"
+    },
+    {
+      "ticker": "ABNB",
+      "status": "SUCCESS",
+      "years": 5,
+      "revenue_coverage": 5,
+      "assets_coverage": 5,
+      "file": "company_csv/ABNB.csv"
+    },
+    {
+      "ticker": "ADBE",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/ADBE.csv"
+    },
+    {
+      "ticker": "AMD",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/AMD.csv"
+    },
+    {
+      "ticker": "AMZN",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/AMZN.csv"
+    },
+    {
+      "ticker": "CRM",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/CRM.csv"
+    },
+    {
+      "ticker": "CRWD",
+      "status": "SUCCESS",
+      "years": 5,
+      "revenue_coverage": 5,
+      "assets_coverage": 5,
+      "file": "company_csv/CRWD.csv"
+    },
+    {
+      "ticker": "CSCO",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/CSCO.csv"
+    },
+    {
+      "ticker": "GOOGL",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/GOOGL.csv"
+    },
+    {
+      "ticker": "IBM",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/IBM.csv"
+    },
+    {
+      "ticker": "INTC",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/INTC.csv"
+    },
+    {
+      "ticker": "INTU",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/INTU.csv"
+    },
+    {
+      "ticker": "META",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/META.csv"
+    },
+    {
+      "ticker": "MSFT",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/MSFT.csv"
+    },
+    {
+      "ticker": "NFLX",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/NFLX.csv"
+    },
+    {
+      "ticker": "NOW",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/NOW.csv"
+    },
+    {
+      "ticker": "NVDA",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/NVDA.csv"
+    },
+    {
+      "ticker": "ORCL",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/ORCL.csv"
+    },
+    {
+      "ticker": "PANW",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/PANW.csv"
+    },
+    {
+      "ticker": "PLTR",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/PLTR.csv"
+    },
+    {
+      "ticker": "PYPL",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/PYPL.csv"
+    },
+    {
+      "ticker": "QCOM",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/QCOM.csv"
+    },
+    {
+      "ticker": "SHOP",
+      "status": "SUCCESS",
+      "years": 2,
+      "revenue_coverage": 2,
+      "assets_coverage": 2,
+      "file": "company_csv/SHOP.csv"
+    },
+    {
+      "ticker": "SNOW",
+      "status": "SUCCESS",
+      "years": 5,
+      "revenue_coverage": 5,
+      "assets_coverage": 5,
+      "file": "company_csv/SNOW.csv"
+    },
+    {
+      "ticker": "SQ",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/SQ.csv"
+    },
+    {
+      "ticker": "TSLA",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/TSLA.csv"
+    },
+    {
+      "ticker": "TWLO",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/TWLO.csv"
+    },
+    {
+      "ticker": "UBER",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/UBER.csv"
+    },
+    {
+      "ticker": "WDAY",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/WDAY.csv"
+    },
+    {
+      "ticker": "ZM",
+      "status": "SUCCESS",
+      "years": 6,
+      "revenue_coverage": 6,
+      "assets_coverage": 6,
+      "file": "company_csv/ZM.csv"
+    }
+  ]
+}
