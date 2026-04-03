@@ -1,10 +1,15 @@
 {
   "_metadata": {
     "ticker": "PLTR",
-    "fetch_timestamp": "2026-04-03T19:26:13.333455",
+    "fetch_timestamp": "2026-04-03T19:57:24.645999",
     "source": "SEC EDGAR Company Facts API",
     "api_endpoint": "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json",
-    "documentation": "https://www.sec.gov/edgar/sec-api-documentation"
+    "documentation": "https://www.sec.gov/edgar/sec-api-documentation",
+    "data_quality": {
+      "has_facts_section": true,
+      "has_us_gaap": true,
+      "us_gaap_tags_count": 353
+    }
   },
   "sec_data": {
     "cik": 1321655,

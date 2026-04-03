@@ -12,6 +12,7 @@ Units:
 - Decimal: all ratios (0.250000 = 25%)
 
 All values rounded to 6 decimal places.
+Null values are written as "NA" in CSV output.
 ================================================================================
 """
 
@@ -83,6 +84,14 @@ def safe_divide(numerator, denominator):
     return numerator / denominator
 
 
+def replace_nan_with_na(df):
+    """Replace NaN/None values with 'NA' string for CSV output."""
+    df = df.copy()
+    # Replace NaN with 'NA' for all columns
+    df = df.replace({np.nan: 'NA', None: 'NA'})
+    return df
+
+
 # ==============================================================================
 # STEP 1: COMBINE CSVs
 # ==============================================================================
@@ -115,7 +124,7 @@ def combine_company_csvs():
     df_combined = df_combined.sort_values(['ticker', 'fiscal_year'], ascending=[True, False])
     
     os.makedirs(RAW_CSV_DIR, exist_ok=True)
-    df_combined.to_csv(os.path.join(RAW_CSV_DIR, 'raw_combined_data.csv'), index=False)
+    df_combined.to_csv(os.path.join(RAW_CSV_DIR, 'raw_combined_data.csv'), index=False, na_rep='NA')
     
     print(f"\n📊 Combined: {len(df_combined)} rows, {df_combined['ticker'].nunique()} companies")
     
@@ -200,7 +209,22 @@ def clean_data(df):
             print(f"   ✓ gross_profit: derived {before - after} values (revenue - cost_of_revenue)")
             cleaning_log.append(f"gross_profit: derived {before - after}")
     
-    # 3. Fill inventory with 0 (many tech companies have no inventory)
+    # 3. Derive total_liabilities if missing: total_liabilities = total_assets - stockholders_equity
+    if 'total_liabilities' in df_clean.columns:
+        before = int(df_clean['total_liabilities'].isnull().sum())
+        mask = df_clean['total_liabilities'].isnull()
+        if 'total_assets' in df_clean.columns and 'stockholders_equity' in df_clean.columns:
+            can_derive = mask & df_clean['total_assets'].notna() & df_clean['stockholders_equity'].notna()
+            df_clean.loc[can_derive, 'total_liabilities'] = (
+                df_clean.loc[can_derive, 'total_assets'] - 
+                df_clean.loc[can_derive, 'stockholders_equity']
+            )
+        after = int(df_clean['total_liabilities'].isnull().sum())
+        if before - after > 0:
+            print(f"   ✓ total_liabilities: derived {before - after} values (total_assets - stockholders_equity)")
+            cleaning_log.append(f"total_liabilities: derived {before - after}")
+    
+    # 4. Fill inventory with 0 (many tech companies have no inventory)
     if 'inventory' in df_clean.columns:
         null_count = int(df_clean['inventory'].isnull().sum())
         df_clean['inventory'] = df_clean['inventory'].fillna(0)
@@ -208,7 +232,7 @@ def clean_data(df):
             print(f"   ✓ inventory: filled {null_count} missing with 0 (tech/SaaS typical)")
             cleaning_log.append(f"inventory: filled {null_count} with 0")
     
-    # 4. Fill long_term_debt with 0 if missing (some companies are debt-free)
+    # 5. Fill long_term_debt with 0 if missing (some companies are debt-free)
     if 'long_term_debt' in df_clean.columns:
         null_count = int(df_clean['long_term_debt'].isnull().sum())
         df_clean['long_term_debt'] = df_clean['long_term_debt'].fillna(0)
@@ -216,7 +240,7 @@ def clean_data(df):
             print(f"   ✓ long_term_debt: filled {null_count} missing with 0")
             cleaning_log.append(f"long_term_debt: filled {null_count} with 0")
     
-    # 5. Fill short_term_investments with 0 if missing
+    # 6. Fill short_term_investments with 0 if missing
     if 'short_term_investments' in df_clean.columns:
         null_count = int(df_clean['short_term_investments'].isnull().sum())
         df_clean['short_term_investments'] = df_clean['short_term_investments'].fillna(0)
@@ -224,13 +248,16 @@ def clean_data(df):
             print(f"   ✓ short_term_investments: filled {null_count} missing with 0")
             cleaning_log.append(f"short_term_investments: filled {null_count} with 0")
     
-    # 6. Fill interest_expense with 0 if missing (some companies have no debt)
+    # 7. Fill interest_expense with 0 if missing (some companies have no debt)
     if 'interest_expense' in df_clean.columns:
         null_count = int(df_clean['interest_expense'].isnull().sum())
         df_clean['interest_expense'] = df_clean['interest_expense'].fillna(0)
         if null_count > 0:
             print(f"   ✓ interest_expense: filled {null_count} missing with 0")
             cleaning_log.append(f"interest_expense: filled {null_count} with 0")
+    
+    # 8. Fill current_assets if missing and can derive from current_liabilities + working capital
+    # (This is optional and company-specific, so we skip complex derivation)
     
     print(f"\n   📊 After cleaning: {len(df_clean)} rows")
     
@@ -380,7 +407,10 @@ def standardize_units(df):
     for col in BILLION_FIELDS:
         if col in df_std.columns:
             new_col = f"{col}_billions"
-            df_std[new_col] = (df_std[col] / 1e9).round(DECIMAL_PLACES)
+            # Round to 6 decimal places, keep NaN as NaN
+            df_std[new_col] = df_std[col].apply(
+                lambda x: round(x / 1e9, DECIMAL_PLACES) if pd.notna(x) else np.nan
+            )
             df_std = df_std.drop(columns=[col])
             print(f"   ✓ {col} → {new_col}")
     
@@ -389,7 +419,9 @@ def standardize_units(df):
     for col in MILLION_FIELDS:
         if col in df_std.columns:
             new_col = f"{col}_millions"
-            df_std[new_col] = (df_std[col] / 1e6).round(DECIMAL_PLACES)
+            df_std[new_col] = df_std[col].apply(
+                lambda x: round(x / 1e6, DECIMAL_PLACES) if pd.notna(x) else np.nan
+            )
             df_std = df_std.drop(columns=[col])
             print(f"   ✓ {col} → {new_col}")
     
@@ -398,7 +430,9 @@ def standardize_units(df):
     for col in PER_SHARE_FIELDS:
         if col in df_std.columns:
             new_col = f"{col}_usd"
-            df_std[new_col] = df_std[col].round(DECIMAL_PLACES)
+            df_std[new_col] = df_std[col].apply(
+                lambda x: round(x, DECIMAL_PLACES) if pd.notna(x) else np.nan
+            )
             df_std = df_std.drop(columns=[col])
             print(f"   ✓ {col} → {new_col}")
     
@@ -406,7 +440,9 @@ def standardize_units(df):
     print("\n   Ratios (decimal, 6 places):")
     for col in RATIO_FIELDS:
         if col in df_std.columns:
-            df_std[col] = df_std[col].round(DECIMAL_PLACES)
+            df_std[col] = df_std[col].apply(
+                lambda x: round(x, DECIMAL_PLACES) if pd.notna(x) else np.nan
+            )
             print(f"   ✓ {col}")
     
     return df_std
@@ -455,14 +491,15 @@ def generate_final_dataset(df):
     df_final = df_final.sort_values(['ticker', 'fiscal_year'], ascending=[True, False])
     df_final = df_final.reset_index(drop=True)
     
-    # Handle remaining NaN - keep as empty for CSV
-    # (NaN will appear as empty cells in CSV)
+    # Replace NaN with 'NA' for CSV output
+    df_final = replace_nan_with_na(df_final)
     
     print(f"\n📊 Final Dataset Summary:")
     print(f"   • Rows: {len(df_final)}")
     print(f"   • Columns: {len(df_final.columns)}")
     print(f"   • Companies: {df_final['ticker'].nunique()}")
     print(f"   • Years: {sorted([int(y) for y in df_final['fiscal_year'].unique()], reverse=True)}")
+    print(f"   • Null values replaced with: 'NA'")
     
     # Column count by category
     income_count = len([c for c in income_cols if c in df_final.columns])
@@ -489,6 +526,7 @@ def main():
     print("=" * 70)
     print(f"📅 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"📏 Decimal places: {DECIMAL_PLACES}")
+    print(f"📝 Null values will be written as 'NA' in CSV")
     
     # Step 1: Combine
     df_combined = combine_company_csvs()
@@ -513,22 +551,26 @@ def main():
     # Save outputs
     os.makedirs(PROCESSED_DIR, exist_ok=True)
     
-    # Main output
+    # Main output - with NA for nulls
     output_file = os.path.join(PROCESSED_DIR, 'final_peer_comparison.csv')
-    df_final.to_csv(output_file, index=False)
+    df_final.to_csv(output_file, index=False, na_rep='NA')
     
     # Latest year
-    latest_year = int(df_final['fiscal_year'].max())
+    # Need to handle 'NA' values when filtering
+    df_final_numeric = df_final.replace('NA', np.nan)
+    df_final_numeric['fiscal_year'] = pd.to_numeric(df_final_numeric['fiscal_year'], errors='coerce')
+    latest_year = int(df_final_numeric['fiscal_year'].max())
     df_latest = df_final[df_final['fiscal_year'] == latest_year]
-    df_latest.to_csv(os.path.join(PROCESSED_DIR, 'peer_comparison_latest_year.csv'), index=False)
+    df_latest.to_csv(os.path.join(PROCESSED_DIR, 'peer_comparison_latest_year.csv'), index=False, na_rep='NA')
     
     # 5-year data
     df_5year = df_final[df_final['fiscal_year'].isin([2024, 2023, 2022, 2021, 2020])]
-    df_5year.to_csv(os.path.join(PROCESSED_DIR, 'peer_comparison_5year.csv'), index=False)
+    df_5year.to_csv(os.path.join(PROCESSED_DIR, 'peer_comparison_5year.csv'), index=False, na_rep='NA')
     
     # Quality report
     quality_report['processing_timestamp'] = datetime.now().isoformat()
     quality_report['cleaning_log'] = cleaning_log
+    quality_report['null_representation'] = 'NA'
     quality_report['final_shape'] = {
         'rows': int(len(df_final)),
         'columns': int(len(df_final.columns)),
@@ -568,7 +610,11 @@ def main():
     print(f"   │ ratios (no suffix) │ Decimal (×100=%)  │ 0.250000=25% │")
     print(f"   └────────────────────────────────────────────────────────┘")
     
-    print(f"\n📋 Sample Data Preview:")
+    print(f"\n📝 NULL HANDLING:")
+    print(f"   • All missing/null values are written as 'NA' in CSV files")
+    print(f"   • This allows clear distinction between zero and missing data")
+    
+    print(f"\n📋 Sample Data Preview (first 5 rows):")
     preview_cols = ['ticker', 'fiscal_year', 'revenue_billions', 'net_income_billions', 'roe', 'gross_margin']
     preview_cols = [c for c in preview_cols if c in df_final.columns]
     print(df_final[preview_cols].head(10).to_string(index=False))

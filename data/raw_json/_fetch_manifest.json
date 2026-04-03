@@ -1,220 +1,257 @@
 {
-  "fetch_timestamp": "2026-04-03T19:26:24.805727",
+  "fetch_timestamp": "2026-04-03T19:57:34.199820",
   "total_companies": 30,
   "successful": 30,
   "failed": 0,
-  "duration_seconds": 41.589246,
+  "empty_data": 0,
+  "duration_seconds": 32.071753,
   "successful_companies": [
     {
       "ticker": "AAPL",
-      "cik": "320193",
+      "cik": "0000320193",
       "name": "Apple Inc.",
       "file": "data/raw_json/AAPL_raw.json",
-      "size_kb": 7853.3
+      "size_kb": 7853.5,
+      "us_gaap_tags": 503
     },
     {
       "ticker": "MSFT",
-      "cik": "789019",
+      "cik": "0000789019",
       "name": "Microsoft Corporation",
       "file": "data/raw_json/MSFT_raw.json",
-      "size_kb": 10032.9
+      "size_kb": 10033.1,
+      "us_gaap_tags": 543
     },
     {
       "ticker": "GOOGL",
-      "cik": "1652044",
+      "cik": "0001652044",
       "name": "Alphabet Inc.",
       "file": "data/raw_json/GOOGL_raw.json",
-      "size_kb": 6339.8
+      "size_kb": 6339.9,
+      "us_gaap_tags": 521
     },
     {
       "ticker": "AMZN",
-      "cik": "1018724",
+      "cik": "0001018724",
       "name": "Amazon.com Inc.",
       "file": "data/raw_json/AMZN_raw.json",
-      "size_kb": 9215.4
+      "size_kb": 9215.6,
+      "us_gaap_tags": 538
     },
     {
       "ticker": "META",
-      "cik": "1326801",
+      "cik": "0001326801",
       "name": "Meta Platforms Inc.",
       "file": "data/raw_json/META_raw.json",
-      "size_kb": 5611.3
+      "size_kb": 5611.5,
+      "us_gaap_tags": 455
     },
     {
       "ticker": "NVDA",
-      "cik": "1045810",
+      "cik": "0001045810",
       "name": "NVIDIA Corporation",
       "file": "data/raw_json/NVDA_raw.json",
-      "size_kb": 8473.8
+      "size_kb": 8473.9,
+      "us_gaap_tags": 625
     },
     {
       "ticker": "TSLA",
-      "cik": "1318605",
+      "cik": "0001318605",
       "name": "Tesla Inc.",
       "file": "data/raw_json/TSLA_raw.json",
-      "size_kb": 7496.0
+      "size_kb": 7496.2,
+      "us_gaap_tags": 638
     },
     {
       "ticker": "ADBE",
-      "cik": "796343",
+      "cik": "0000796343",
       "name": "Adobe Inc.",
       "file": "data/raw_json/ADBE_raw.json",
-      "size_kb": 9026.6
+      "size_kb": 9026.7,
+      "us_gaap_tags": 558
     },
     {
       "ticker": "CRM",
-      "cik": "1108524",
+      "cik": "0001108524",
       "name": "Salesforce Inc.",
       "file": "data/raw_json/CRM_raw.json",
-      "size_kb": 9801.0
+      "size_kb": 9801.1,
+      "us_gaap_tags": 686
     },
     {
       "ticker": "NFLX",
-      "cik": "1065280",
+      "cik": "0001065280",
       "name": "Netflix Inc.",
       "file": "data/raw_json/NFLX_raw.json",
-      "size_kb": 7425.1
+      "size_kb": 7425.2,
+      "us_gaap_tags": 490
     },
     {
       "ticker": "ORCL",
-      "cik": "1341439",
+      "cik": "0001341439",
       "name": "Oracle Corporation",
       "file": "data/raw_json/ORCL_raw.json",
-      "size_kb": 8096.0
+      "size_kb": 8096.1,
+      "us_gaap_tags": 511
     },
     {
       "ticker": "INTC",
-      "cik": "50863",
+      "cik": "0000050863",
       "name": "Intel Corporation",
       "file": "data/raw_json/INTC_raw.json",
-      "size_kb": 8909.3
+      "size_kb": 8909.4,
+      "us_gaap_tags": 671
     },
     {
       "ticker": "AMD",
-      "cik": "2488",
+      "cik": "0000002488",
       "name": "Advanced Micro Devices",
       "file": "data/raw_json/AMD_raw.json",
-      "size_kb": 7512.6
+      "size_kb": 7512.7,
+      "us_gaap_tags": 770
     },
     {
       "ticker": "CSCO",
-      "cik": "858877",
+      "cik": "0000858877",
       "name": "Cisco Systems Inc.",
       "file": "data/raw_json/CSCO_raw.json",
-      "size_kb": 12727.6
+      "size_kb": 12727.7,
+      "us_gaap_tags": 768
     },
     {
       "ticker": "IBM",
-      "cik": "51143",
+      "cik": "0000051143",
       "name": "IBM Corporation",
       "file": "data/raw_json/IBM_raw.json",
-      "size_kb": 11724.2
+      "size_kb": 11724.3,
+      "us_gaap_tags": 777
     },
     {
       "ticker": "QCOM",
-      "cik": "804328",
+      "cik": "0000804328",
       "name": "Qualcomm Inc.",
       "file": "data/raw_json/QCOM_raw.json",
-      "size_kb": 9056.0
+      "size_kb": 9056.1,
+      "us_gaap_tags": 685
     },
     {
       "ticker": "NOW",
-      "cik": "1373715",
+      "cik": "0001373715",
       "name": "ServiceNow Inc.",
       "file": "data/raw_json/NOW_raw.json",
-      "size_kb": 6693.6
+      "size_kb": 6693.7,
+      "us_gaap_tags": 528
     },
     {
       "ticker": "INTU",
-      "cik": "896878",
+      "cik": "0000896878",
       "name": "Intuit Inc.",
       "file": "data/raw_json/INTU_raw.json",
-      "size_kb": 9087.4
+      "size_kb": 9087.5,
+      "us_gaap_tags": 519
     },
     {
       "ticker": "PLTR",
-      "cik": "1321655",
+      "cik": "0001321655",
       "name": "Palantir Technologies",
       "file": "data/raw_json/PLTR_raw.json",
-      "size_kb": 2427.0
+      "size_kb": 2427.2,
+      "us_gaap_tags": 353
     },
     {
       "ticker": "SNOW",
-      "cik": "1640147",
+      "cik": "0001640147",
       "name": "Snowflake Inc.",
       "file": "data/raw_json/SNOW_raw.json",
-      "size_kb": 3152.0
+      "size_kb": 3152.1,
+      "us_gaap_tags": 353
     },
     {
       "ticker": "CRWD",
-      "cik": "1535527",
+      "cik": "0001535527",
       "name": "CrowdStrike Holdings",
       "file": "data/raw_json/CRWD_raw.json",
-      "size_kb": 3823.2
+      "size_kb": 3823.3,
+      "us_gaap_tags": 430
     },
     {
       "ticker": "PANW",
-      "cik": "1327567",
+      "cik": "0001327567",
       "name": "Palo Alto Networks",
       "file": "data/raw_json/PANW_raw.json",
-      "size_kb": 6412.0
+      "size_kb": 6412.1,
+      "us_gaap_tags": 500
     },
     {
       "ticker": "WDAY",
-      "cik": "1327811",
+      "cik": "0001327811",
       "name": "Workday Inc.",
       "file": "data/raw_json/WDAY_raw.json",
-      "size_kb": 6885.4
+      "size_kb": 6885.5,
+      "us_gaap_tags": 514
     },
     {
       "ticker": "UBER",
-      "cik": "1543151",
+      "cik": "0001543151",
       "name": "Uber Technologies",
       "file": "data/raw_json/UBER_raw.json",
-      "size_kb": 4222.1
+      "size_kb": 4222.2,
+      "us_gaap_tags": 477
     },
     {
       "ticker": "ABNB",
-      "cik": "1559720",
+      "cik": "0001559720",
       "name": "Airbnb Inc.",
       "file": "data/raw_json/ABNB_raw.json",
-      "size_kb": 2441.7
+      "size_kb": 2441.8,
+      "us_gaap_tags": 354
     },
     {
       "ticker": "PYPL",
-      "cik": "1633917",
+      "cik": "0001633917",
       "name": "PayPal Holdings",
       "file": "data/raw_json/PYPL_raw.json",
-      "size_kb": 6270.8
+      "size_kb": 6270.9,
+      "us_gaap_tags": 499
     },
     {
       "ticker": "SQ",
-      "cik": "1512673",
+      "cik": "0001512673",
       "name": "Block Inc.",
       "file": "data/raw_json/SQ_raw.json",
-      "size_kb": 5524.2
+      "size_kb": 5524.3,
+      "us_gaap_tags": 498
     },
     {
       "ticker": "SHOP",
-      "cik": "1594805",
+      "cik": "0001594805",
       "name": "Shopify Inc.",
       "file": "data/raw_json/SHOP_raw.json",
-      "size_kb": 1700.4
+      "size_kb": 1700.5,
+      "us_gaap_tags": 347
     },
     {
       "ticker": "ZM",
-      "cik": "1585521",
+      "cik": "0001585521",
       "name": "Zoom Video",
       "file": "data/raw_json/ZM_raw.json",
-      "size_kb": 3346.9
+      "size_kb": 3347.1,
+      "us_gaap_tags": 346
     },
     {
       "ticker": "TWLO",
-      "cik": "1447669",
+      "cik": "0001447669",
       "name": "Twilio Inc.",
       "file": "data/raw_json/TWLO_raw.json",
-      "size_kb": 4767.6
+      "size_kb": 4767.7,
+      "us_gaap_tags": 460
     }
   ],
-  "failed_companies": []
+  "failed_companies": [],
+  "empty_data_companies": [],
+  "api_info": {
+    "base_url": "https://data.sec.gov/api/xbrl/companyfacts",
+    "user_agent": "Abhishek_IIITA iit2023261@iiita.ac.in",
+    "rate_limit_delay": 0.15
+  }
 }
