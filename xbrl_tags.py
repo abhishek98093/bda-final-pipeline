@@ -102,19 +102,17 @@ FEATURE_MAP = {
     ],
 
     "eps_basic": [
-        "EarningsPerShareBasic",
-        "EarningsPerShareBasicAndDiluted",
-        "WeightedAverageNumberOfSharesOutstandingBasic",
-        "IncomeLossFromContinuingOperationsPerBasicShare",
-        "WeightedAverageNumberOfShareOutstandingBasicAndDiluted",
-    ],
+    "EarningsPerShareBasic",
+    "EarningsPerShareBasicAndDiluted",
+    "IncomeLossFromContinuingOperationsPerBasicShare",
+],
 
-    "eps_diluted": [
-        "EarningsPerShareDiluted",
-        "WeightedAverageNumberOfDilutedSharesOutstanding",
-        "IncomeLossFromContinuingOperationsPerDilutedShare",
-        "EarningsPerShareBasicAndDiluted",
-    ],
+"eps_diluted": [
+    "EarningsPerShareDiluted",
+    "IncomeLossFromContinuingOperationsPerDilutedShare",
+    "EarningsPerShareBasicAndDiluted",
+
+],
 
     # ================= BALANCE SHEET =================
 

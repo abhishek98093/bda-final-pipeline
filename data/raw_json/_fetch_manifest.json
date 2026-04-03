@@ -1,10 +1,10 @@
 {
-  "fetch_timestamp": "2026-04-03T19:57:34.199820",
+  "fetch_timestamp": "2026-04-03T20:35:56.935559",
   "total_companies": 30,
   "successful": 30,
   "failed": 0,
   "empty_data": 0,
-  "duration_seconds": 32.071753,
+  "duration_seconds": 35.746976,
   "successful_companies": [
     {
       "ticker": "AAPL",
