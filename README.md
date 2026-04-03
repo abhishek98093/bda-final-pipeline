@@ -2,9 +2,9 @@
 
 ## 📋 Overview
 
-This is a professional **3-stage data extraction pipeline** for the FDA-4 assignment (Comparative Financial Analysis across Industry Peers).
+This is a **3-stage data extraction pipeline** for the FDA-4 assignment (Comparative Financial Analysis across Industry Peers).
 
-**Data Source:** SEC EDGAR Company Facts API (100% real data!)
+**Data Source:** SEC EDGAR Company Facts API 
 - API Documentation: https://www.sec.gov/edgar/sec-api-documentation
 - Endpoint: `https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json`
 
@@ -19,7 +19,7 @@ fda4_pipeline/
 ├── 02_json_to_company_csv.py    # Stage 2: Extract JSON → Company CSVs
 ├── 03_combine_and_process.py    # Stage 3: Combine, Clean & Calculate Ratios
 ├── xbrl_tags.py                 # XBRL tag mapping (all companies)
-├── README.md                    # This file
+├── README.md                    # readme file
 │
 ├── data/
 │   ├── raw_json/                # Stage 1 output
@@ -56,7 +56,7 @@ source venv/bin/activate
 pip install pandas numpy requests
 ```
 
-### 2. ⚠️ IMPORTANT: Edit Your Email (Stage 1 only)
+### 2. ⚠️ IMPORTANT: Edit Your Email
 
 Open `01_fetch_raw_data.py` and change:
 ```python
@@ -89,7 +89,7 @@ python 03_combine_and_process.py   # Stage 3: Combine & Process
 - Calls SEC EDGAR API for each of 30 companies
 - Saves raw JSON responses as `data/raw_json/{TICKER}_raw.json`
 - Zero-pads CIK numbers automatically (e.g., 320193 → 0000320193)
-- No processing - pure data acquisition
+- data acquisition
 
 ### Stage 2: JSON to Company CSV (`02_json_to_company_csv.py`)
 - Reads each raw JSON file
@@ -234,13 +234,6 @@ Abhishek kumar	IIT2023261
 ```bash
 # Full pipeline run
 python run_pipeline.py
-
-# Skip fetching (if JSONs exist)
-python run_pipeline.py --skip-fetch
-
-# Run specific stage
-python run_pipeline.py --stage 2
-python run_pipeline.py --stage 3
 
 # Check final output
 head data/processed/final_peer_comparison.csv
