@@ -13,30 +13,6 @@
   },
   "missing_values": [
     {
-      "feature": "inventory",
-      "available_pct": 45.1
-    },
-    {
-      "feature": "total_liabilities",
-      "available_pct": 88.4
-    },
-    {
-      "feature": "long_term_debt",
-      "available_pct": 90.8
-    },
-    {
-      "feature": "interest_expense",
-      "available_pct": 96.5
-    },
-    {
-      "feature": "operating_income",
-      "available_pct": 97.1
-    },
-    {
-      "feature": "short_term_investments",
-      "available_pct": 99.4
-    },
-    {
       "feature": "revenue",
       "available_pct": 100.0
     },
@@ -49,20 +25,20 @@
       "available_pct": 100.0
     },
     {
+      "feature": "operating_income",
+      "available_pct": 97.1
+    },
+    {
       "feature": "cost_of_revenue",
-      "available_pct": 100.0
-    },
-    {
-      "feature": "eps_basic",
-      "available_pct": 100.0
-    },
-    {
-      "feature": "eps_diluted",
       "available_pct": 100.0
     },
     {
       "feature": "total_assets",
       "available_pct": 100.0
+    },
+    {
+      "feature": "total_liabilities",
+      "available_pct": 88.4
     },
     {
       "feature": "stockholders_equity",
@@ -81,22 +57,85 @@
       "available_pct": 100.0
     },
     {
+      "feature": "short_term_investments",
+      "available_pct": 99.4
+    },
+    {
       "feature": "accounts_receivable",
+      "available_pct": 100.0
+    },
+    {
+      "feature": "long_term_debt",
+      "available_pct": 90.8
+    },
+    {
+      "feature": "inventory",
+      "available_pct": 45.1
+    },
+    {
+      "feature": "interest_expense",
+      "available_pct": 96.5
+    },
+    {
+      "feature": "eps_basic",
+      "available_pct": 100.0
+    },
+    {
+      "feature": "eps_diluted",
       "available_pct": 100.0
     }
   ],
-  "coverage": {
-    "full_6_years": 26,
-    "partial": 3,
-    "low": 1
-  },
-  "processing_timestamp": "2026-04-03T15:00:53.475276",
+  "processing_timestamp": "2026-04-03T18:22:19.158471",
   "cleaning_log": [
-    "Inventory: filled 95"
+    "inventory: filled 95 with 0",
+    "long_term_debt: filled 16 with 0",
+    "short_term_investments: filled 1 with 0",
+    "interest_expense: filled 6 with 0"
   ],
   "final_shape": {
     "rows": 173,
     "columns": 33,
     "companies": 30
-  }
+  },
+  "units_reference": {
+    "billions_usd": [
+      "revenue_billions",
+      "net_income_billions",
+      "gross_profit_billions",
+      "operating_income_billions",
+      "cost_of_revenue_billions",
+      "total_assets_billions",
+      "total_liabilities_billions",
+      "stockholders_equity_billions",
+      "current_assets_billions",
+      "current_liabilities_billions",
+      "cash_and_equivalents_billions",
+      "short_term_investments_billions",
+      "accounts_receivable_billions",
+      "long_term_debt_billions",
+      "inventory_billions"
+    ],
+    "millions_usd": [
+      "interest_expense_millions"
+    ],
+    "per_share_usd": [
+      "eps_basic_usd",
+      "eps_diluted_usd"
+    ],
+    "ratios_decimal": [
+      "roe",
+      "roa",
+      "gross_margin",
+      "net_margin",
+      "operating_margin",
+      "current_ratio",
+      "quick_ratio",
+      "debt_to_equity",
+      "debt_to_assets",
+      "interest_coverage",
+      "asset_turnover",
+      "equity_turnover"
+    ]
+  },
+  "decimal_places": 6
 }
