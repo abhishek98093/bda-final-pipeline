@@ -198,18 +198,6 @@ data/processed/final_peer_comparison.csv
 
 ---
 
-## ⏱️ Estimated Time
-
-| Stage | Duration |
-|-------|----------|
-| Stage 1 (Fetching) | ~5-7 minutes |
-| Stage 2 (JSON → CSV) | ~3 seconds |
-| Stage 3 (Processing) | ~3 seconds |
-| **Total** | **~8 minutes** |
-
-*If you already have JSON files, skip Stage 1 and complete in <10 seconds!*
-
----
 
 ## 🔧 XBRL Tag Mapping
 
@@ -235,7 +223,9 @@ The pipeline uses **first match wins** - it tries each tag in order until one re
 ---
 
 ## 👨‍💻 Author
-
+Ankit	IIT2023120
+Aditya Pankaj Sharma	IIT2023162
+Abhishek kumar	IIT2023261
 **FDA-4 Assignment** - Comparative Financial Analysis across Industry Peers  
 **Course:** Big Data Analytics (Jan-July 2026)  
 **Institute:** IIIT Allahabad
